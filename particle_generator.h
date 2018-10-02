@@ -12,7 +12,7 @@
 struct Particle {
 	Vec2 position;
 	Vec2 velocity;
-	Vec2 scale;
+	float scale;
 	Vec4 color;
 	float life;
 };
@@ -36,11 +36,20 @@ public:
 	void draw();
 
 private:
+#if 0
 	GLuint vao;
+#else
+	GLuint billboard_vbo;
+	GLuint pos_vbo;
+	GLuint color_vbo;
+#endif
 	Shader shader;
 	Texture2D texture;
 	uint32_t last_used_particle = 0;
 	uint32_t amount;
+
+	std::vector<Vec4> particle_position_size_data;
+	std::vector<Vec4> particle_color_data;
 
 	void respawn_particle(Particle* particle);
 	uint32_t first_unused_particle();

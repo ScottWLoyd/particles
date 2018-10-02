@@ -91,5 +91,11 @@
     <None Include="shaders\particle_vertex.glsl">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\instance_part_frag.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\instance_part_vert.glsl">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

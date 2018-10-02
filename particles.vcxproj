@@ -255,6 +255,8 @@
     <None Include="shaders\2d_vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="shaders\instance_part_frag.glsl" />
+    <None Include="shaders\instance_part_vert.glsl" />
     <None Include="shaders\particle_fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>

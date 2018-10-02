@@ -33,6 +33,11 @@ void Game::init()
 	shader_set_integer(&part_shader, "sprite", 0);
 	shader_set_matrix4(&part_shader, "projection", projection);	
 
+	load_shader("shaders/instance_part_vert.glsl", "shaders/instance_part_frag.glsl", NULL, "instance");
+	Shader inst_shader = get_shader("instance");
+	shader_use(&inst_shader);
+	shader_set_matrix4(&inst_shader, "projection", projection);
+
 	// Load textures
 	load_texture("textures/background.jpg", false, "background");
 	load_texture("textures/awesomeface.png", true, "face");
@@ -47,6 +52,8 @@ void Game::init()
 	load_texture("textures/flame.png", true, "flame");
 
 	renderer = new_sprite_renderer(sprite_shader);
+
+#if 0
 	ParticleGenerator* particles = new ParticleGenerator(part_shader, get_texture("flame"), 800, 1);
 	particles->size = Vec2(25);
 	particles->position = Vec2(this->width / 2, this->height * 2 / 3);
@@ -57,6 +64,18 @@ void Game::init()
 	particles->gravity = -300;
 	particles->drag = Vec2{ 0.995f, 1 };
 	this->objects.push_back(particles);
+#else
+	ParticleGenerator* particles = new ParticleGenerator(inst_shader, get_texture("flame"), 800, 1);
+	particles->size = Vec2(25);
+	particles->position = Vec2(this->width / 2, this->height * 2 / 3);
+	particles->velocity = Vec2(0);
+	particles->speed0 = 150;	particles->speed1 = 300;
+	particles->theta0 = 00;	particles->theta1 = 180;
+	particles->color0 = Vec4{ 1,0,0,1 }; particles->color1 = Vec4{ 1,1,0.35f,1 };
+	particles->gravity = -300;
+	particles->drag = Vec2{ 0.995f, 1 };
+	this->objects.push_back(particles);
+#endif
 		
 	CHECK_ERROR;
 }
